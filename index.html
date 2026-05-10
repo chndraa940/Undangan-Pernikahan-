@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Neng Leni & Toto Tajudin Wedding</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(180deg,#eef6ff,#ffffff);
+    color:#1b365d;
+    overflow-x:hidden;
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 20px;
+    position:relative;
+    overflow:hidden;
+}
+
+.flower{
+    position:absolute;
+    width:250px;
+    opacity:0.15;
+    animation:float 7s ease-in-out infinite;
+}
+
+.flower.top{
+    top:-30px;
+    left:-40px;
+}
+
+.flower.bottom{
+    bottom:-40px;
+    right:-40px;
+    transform:rotate(180deg);
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(15px);
+    }
+}
+
+.card{
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.6);
+    border-radius:30px;
+    padding:50px 30px;
+    max-width:700px;
+    width:100%;
+    box-shadow:0 10px 40px rgba(0,74,171,0.12);
+}
+
+.small-title{
+    letter-spacing:3px;
+    color:#5a84b6;
+    margin-bottom:15px;
+}
+
+.names{
+    font-family:'Great Vibes',cursive;
+    font-size:70px;
+    color:#004aab;
+    margin-bottom:10px;
+}
+
+.date{
+    font-size:20px;
+    margin-bottom:40px;
+    color:#35639e;
+}
+
+.countdown{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:40px;
+}
+
+.box{
+    background:white;
+    border-radius:20px;
+    width:110px;
+    padding:18px;
+    box-shadow:0 5px 20px rgba(0,74,171,0.08);
+}
+
+.box h2{
+    font-size:38px;
+    color:#004aab;
+}
+
+.box p{
+    font-size:14px;
+    color:#5a84b6;
+}
+
+.location-btn{
+    display:inline-block;
+    text-decoration:none;
+    background:#004aab;
+    color:white;
+    padding:16px 28px;
+    border-radius:50px;
+    font-weight:600;
+    transition:0.3s;
+    box-shadow:0 8px 20px rgba(0,74,171,0.2);
+}
+
+.location-btn:hover{
+    transform:translateY(-3px);
+    background:#00357a;
+}
+
+.footer{
+    margin-top:40px;
+    color:#6b86aa;
+    font-size:14px;
+}
+
+audio{
+    display:none;
+}
+
+.music-btn{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:white;
+    border:none;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    box-shadow:0 5px 20px rgba(0,0,0,0.15);
+    font-size:22px;
+    cursor:pointer;
+}
+
+@media(max-width:600px){
+
+.names{
+    font-size:52px;
+}
+
+.box{
+    width:90px;
+}
+
+.box h2{
+    font-size:30px;
+}
+
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+
+    <img class="flower top" src="https://cdn-icons-png.flaticon.com/512/616/616408.png">
+    <img class="flower bottom" src="https://cdn-icons-png.flaticon.com/512/616/616408.png">
+
+    <div class="card">
+
+        <p class="small-title">THE WEDDING OF</p>
+
+        <h1 class="names">Neng Leni & Toto Tajudin</h1>
+
+        <p class="date">Monday, May 18 2026</p>
+
+        <div class="countdown">
+
+            <div class="box">
+                <h2 id="days">0</h2>
+                <p>Days</p>
+            </div>
+
+            <div class="box">
+                <h2 id="hours">0</h2>
+                <p>Hours</p>
+            </div>
+
+            <div class="box">
+                <h2 id="minutes">0</h2>
+                <p>Minutes</p>
+            </div>
+
+            <div class="box">
+                <h2 id="seconds">0</h2>
+                <p>Seconds</p>
+            </div>
+
+        </div>
+
+        <a 
+        class="location-btn" 
+        target="_blank"
+        href="https://maps.app.goo.gl/TdhPvh5oANsuuq948?g_st=ac">
+        📍 Open Event Location
+        </a>
+
+        <p class="footer">
+            Thank you for being part of our happiest chapter 🤍
+        </p>
+
+    </div>
+
+</section>
+
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
+
+<audio id="music" loop autoplay>
+    <source src="https://files.catbox.moe/6qv4n2.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+const targetDate = new Date("May 18, 2026 09:00:00").getTime();
+
+const timer = setInterval(function(){
+
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours;
+    document.getElementById("minutes").innerHTML = minutes;
+    document.getElementById("seconds").innerHTML = seconds;
+
+    if(distance < 0){
+        clearInterval(timer);
+        document.querySelector(".countdown").innerHTML = "<h2>The Wedding Day Has Arrived 🤍</h2>";
+    }
+
+},1000);
+
+const music = document.getElementById("music");
+
+function toggleMusic(){
+
+    if(music.paused){
+        music.play();
+    }else{
+        music.pause();
+    }
+
+}
+
+document.body.addEventListener("click", function(){
+    music.play();
+}, { once:true });
+
+</script>
+
+</body>
+</html>
